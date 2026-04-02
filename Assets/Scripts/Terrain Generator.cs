@@ -6,12 +6,29 @@ public class TerrainGenerator : MonoBehaviour
 
     public SpriteShapeController Terrain;
     SpriteShapeController chunk;
+    public SpriteShapeController[] c;
     int y=1;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        SpawnThreeChunks();
+        //SpawnThreeChunks();
+        spawnTesting();
+    }
+    void spawnTesting()
+    {   Vector3 spawnPos = Vector3.zero; 
+        for (int i = 0; i < c.Length; i++)
+        {
+            // Instantiate chunk at current position
+            SpriteShapeController newChunk = Instantiate(
+                c[i],
+                spawnPos,
+                Quaternion.identity
+                
+            );
+
+            spawnPos = new Vector3(spawnPos.x+41,spawnPos.y-3, 0);
+        }
     }
 
 
@@ -43,7 +60,8 @@ public class TerrainGenerator : MonoBehaviour
         spline.RemovePointAt(i++);
         Vector3 PointB = spline.GetPosition(0);
         spline.SetPosition(0,new Vector3(0, y,0));
-        
+
+
 
     }
 
