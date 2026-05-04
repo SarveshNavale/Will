@@ -27,7 +27,7 @@ public class TerrainGenerator : MonoBehaviour
                 
             );
 
-            spawnPos = new Vector3(spawnPos.x+41,spawnPos.y-3, 0);
+            spawnPos = new Vector3(spawnPos.x+61,spawnPos.y-7, 0);
         }
     }
 
