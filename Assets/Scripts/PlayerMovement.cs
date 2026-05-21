@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] float speed = 8f;
+    public GameSpeedData SpeedData;
+    
     [SerializeField] float rayDistance = 1.2f;
     [SerializeField] LayerMask groundLayer;
 
@@ -28,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
 
             Vector2 slopeDir = new Vector2(normal.y, -normal.x).normalized;
 
-            Vector2 targetVelocity = slopeDir * speed;
+            Vector2 targetVelocity = slopeDir * SpeedData.PlayerSpeed;
 
             // smooth velocity (KEY FIX)
             rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, targetVelocity, 0.25f);
@@ -47,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            rb.linearVelocity = new Vector2(speed, rb.linearVelocity.y);
+            rb.linearVelocity = new Vector2(SpeedData.PlayerSpeed, rb.linearVelocity.y);
         }
     }
 }
