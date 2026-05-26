@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9d2415d6d6e6deb44aca92217e2ca7ba
+guid: 551c861bae150494d9adbc7dae687a9a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6213588578217095893
-    second: FrontRanges 1_0
+      213: -738100331790938058
+    second: FrontRanges_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: FrontRanges 1_0
+      name: FrontRanges_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 4243
-        height: 697
+        y: 1
+        width: 15952
+        height: 873
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5d2fd0114e91b3650800000000000000
-      internalID: 6213588578217095893
+      spriteID: 630d00ba8adb1c5f0800000000000000
+      internalID: -738100331790938058
       vertices: []
       indices: 
       edges: []

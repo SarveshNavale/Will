@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public GameSpeedData SpeedData;
-    
+
     [SerializeField] float rayDistance = 1.2f;
     [SerializeField] LayerMask groundLayer;
 
@@ -16,38 +16,35 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector2 origin = transform.position + Vector3.down * 0.5f;
+        Vector2 origin = (Vector2)transform.position + Vector2.down * 0.5f;
         RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.down, rayDistance, groundLayer);
 
         if (hit.collider != null)
         {
             Vector2 normal = hit.normal;
 
-            // filter micro slope noise
+            // stabilize flat ground
             if (Vector2.Angle(normal, Vector2.up) < 1f)
                 normal = Vector2.up;
 
+            // slope direction
             Vector2 slopeDir = new Vector2(normal.y, -normal.x).normalized;
 
             Vector2 targetVelocity = slopeDir * SpeedData.PlayerSpeed;
 
-            // smooth velocity (KEY FIX)
+            // smooth movement
             rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, targetVelocity, 0.25f);
 
-            // smooth rotation
+            // rotate to slope
             float angle = Mathf.Atan2(normal.y, normal.x) * Mathf.Rad2Deg - 90f;
 
-            transform.rotation = Quaternion.Lerp(
-                transform.rotation,
-                Quaternion.Euler(0, 0, angle),
-                12f * Time.fixedDeltaTime
+            rb.MoveRotation(
+                Mathf.LerpAngle(rb.rotation, angle, 12f * Time.fixedDeltaTime)
             );
-
-            // ground snap (optional but powerful)
-            transform.position = new Vector2(transform.position.x, hit.point.y + 0.5f);
         }
         else
         {
+            // air / no ground
             rb.linearVelocity = new Vector2(SpeedData.PlayerSpeed, rb.linearVelocity.y);
         }
     }

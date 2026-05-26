@@ -7,12 +7,12 @@ public class BackgroundMover : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Debug.Log(speedData.PlayerSpeed);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        transform.position += Vector3.left * speedData.PlayerSpeed * Time.deltaTime;   
     }
 }
