@@ -17,26 +17,22 @@ public class EnvironmentGenerator : MonoBehaviour
 
     private void OnValidate()
     {
-        _spriteShapeController.spline.Clear();
+       _spriteShapeController.spline.Clear();
 
-        for (int i = 0; i < _levelLength; i++)
+       for (int i =0; i < _levelLength; i++)
         {
-            _lastPos = new Vector3(i * _xMultiplier,Mathf.PerlinNoise(0, i * _noiseStep) * _yMultiplier);
+            _lastPos = new Vector3(i * _xMultiplier, Mathf.PerlinNoise(0, i* _noiseStep)*_yMultiplier);
+            _spriteShapeController.spline.InsertPointAt(i,  _lastPos);
 
-            _spriteShapeController.spline.InsertPointAt(i, _lastPos);
-
-            if (i != 0 && i != _levelLength - 1)
+            if(i!=0 && i != _levelLength - 1)
             {
                 _spriteShapeController.spline.SetTangentMode(i, ShapeTangentMode.Continuous);
-
-                _spriteShapeController.spline.SetLeftTangent( i,Vector3.left * _xMultiplier * _curveSmoothness);
-
-                _spriteShapeController.spline.SetRightTangent(   i, Vector3.right * _xMultiplier * _curveSmoothness);
+                _spriteShapeController.spline.SetLeftTangent(i, Vector3.left * _xMultiplier * _curveSmoothness);
+                _spriteShapeController.spline.SetRightTangent(i, Vector3.right * _xMultiplier * _curveSmoothness);
             }
         }
 
-        _spriteShapeController.spline.InsertPointAt(_levelLength, new Vector3(_lastPos.x, -_bottom) );
-
-        _spriteShapeController.spline.InsertPointAt(  _levelLength + 1,new Vector3(0, -_bottom));
+        _spriteShapeController.spline.InsertPointAt(_levelLength, new Vector3(_lastPos.x, -_bottom));
+        _spriteShapeController.spline.InsertPointAt(_levelLength+1, new Vector3(0, -_bottom));
     }
 }
